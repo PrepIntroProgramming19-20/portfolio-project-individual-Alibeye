@@ -18,8 +18,10 @@ public class Quiz
     Question q4 = new Question( "What points did the Banana Republic clicker use?", new String [] {"capitalist", "banana bucks", "lives ruined"}, 2);
     Question array [] = {q1,q2,q3,q4};
 
-    JLabel nComponent;
-
+    JButton nComponent;
+    JPanel cComponent;
+    JButton sComponent;
+    JButton eComponent;
     public Quiz()
     {
         frame = new JFrame();
