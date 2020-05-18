@@ -12,4 +12,13 @@ public class Question
         options = startOptions;
 
     }
+
+    public boolean check(String guess) { //check to see if the answer the user chose matches the parameter 
+        if (guess.equals(answer)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
