@@ -47,21 +47,21 @@ public class Quiz extends JPanel implements ActionListener
         JButton eComponent = new JButton(shown.options[2]);
         JButton wComponent = new JButton(shown.options[3]);
         JPanel cComponent = new JPanel();
-        JLabel ncComponent2 = new JLabel(shown.text);
+        JLabel nComponent2 = new JLabel(shown.text);
         //JPanel cComponent2 = new JPanel(//some dumb image); //
-        try {
-            clip = AudioSystem.getClip();    
+        /*try {
+        clip = AudioSystem.getClip();    
         } catch (javax.sound.sampled.LineUnavailableException k){}
         try  {
-            audioStream = AudioSystem.getAudioInputStream(new File(radar).getAbsoluteFile());
+        audioStream = AudioSystem.getAudioInputStream(new File(radar).getAbsoluteFile());
         } catch (javax.sound.sampled.UnsupportedAudioFileException z) {
 
         } catch(java.io.IOException w) {}
         try {
-            clip.open(audioStream);
+        clip.open(audioStream);
         } catch(LineUnavailableException e){
 
-        } catch(java.io.IOException x){}
+        } catch(java.io.IOException x){} */
         frame.setLayout(new BorderLayout());
         cComponent.setLayout(new BorderLayout());
         frame.add(BorderLayout.NORTH, nComponent);
@@ -70,7 +70,7 @@ public class Quiz extends JPanel implements ActionListener
         frame.add(BorderLayout.WEST, wComponent);
         //frame2.add()//
         cComponent.add(BorderLayout.NORTH, nComponent2);
-        cComponent.add(BorderLayout.CENTER, cComponent2);
+        //cComponent.add(BorderLayout.CENTER, cComponent2);
         nComponent.addActionListener(this);
         sComponent.addActionListener(new choiceB());
         eComponent.addActionListener(new choiceC());
@@ -85,8 +85,9 @@ public class Quiz extends JPanel implements ActionListener
         shown = array[i];     
     }
 
-    public void actionPerformered() {
-        String guess = shown.options [0] ;
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        String guess =event.getActionCommand();
         if (shown.check(guess)) {
             score = score + value;
             questionsAsked++;
@@ -105,8 +106,10 @@ public class Quiz extends JPanel implements ActionListener
     }
 
     class choiceC implements ActionListener{   //action listener
+        @Override
         public void actionPerformed(ActionEvent event) {
             String guess = shown.options [2] ;
+
             if (shown.check(guess)) {
                 score = score + value;
                 questionsAsked++;
@@ -148,7 +151,7 @@ public class Quiz extends JPanel implements ActionListener
 
     class choiceD implements ActionListener{   //action listener
         public void actionPerformed(ActionEvent event) {
-            String guess = shown.options [3] ;
+            String guess = shown.options [3];
             if (shown.check(guess)) {
                 score = score + value;
                 questionsAsked++;
