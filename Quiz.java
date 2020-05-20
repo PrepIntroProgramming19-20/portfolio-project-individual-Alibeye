@@ -21,16 +21,27 @@ public class Quiz implements ActionListener
     JFrame frame3;
     JFrame frame4;
 
-    Question q1 = new Question( "How many students were originally in the class?", new String [] {"12" , "9" , "15" , "18"}, 0 ); 
-    Question q2 = new Question( "What was Nick's favorite part of the class?", new String [] {"working with GUIs", "Scratch", "lessons with Dr. Delin", "complaining about art history" }, 1);
-    Question q3 = new Question( "What is Nathan's go to don't focus in class game?", new String [] {"Minecraft", "Slay the Spire", "Cuphead" , "Nathan never played games in class"}, 3);
-    Question q4 = new Question( "What points did the Banana Republic clicker use?", new String [] {"capitalist cash", "banana bucks", "lives ruined", "socialists arrested"}, 2);
-    Question q5 = new Question( "What was Alec's Scratch final assignment about? ", new String [] {"choose your own adventure game" , "Dating Michael Cera" , "Ryhtem pinball" , "Kanye pong"}, 1 ); 
-    Question q6 = new Question( "How many times has Alec brought pretzels to class?", new String [] {"6", "3", "11", "13" }, 2);
-    Question q7 = new Question( "Which of the following teachers has sat in on our lectures?", new String [] {"Mr. Fritz", "Mrs. Gi", "Dr. Wahi" , "Dr.Williams"}, 1);
-    Question q8 = new Question( "Who is this?", new String [] {"Alec front", "Bernie", "Alec back", "I've never seen this person in my life"}, 2);
-    Question q9 = new Question( "Which anime is the poster in the lab from?", new String [] {"Cowboy Beebop" , "Fooly Cooly" , "Trigun" , "Samurai Champloon"}, 0 ); 
-    Question q10 = new Question( "What was the first algorithm our class worked on", new String [] {"How to get ready in the morning", "How to make a sandwhich", "How to do your homework", "How to commit tax fraud" }, 1);
+    ImageIcon Center = new ImageIcon("test.jpg");
+    ImageIcon Center2 = new ImageIcon("Worm.jpg");
+    ImageIcon Center3 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center4 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center5 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center6 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center7 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center8 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center9 = new ImageIcon("Yeti.jpg");
+    ImageIcon Center10 = new ImageIcon("Yeti.jpg");
+
+    Question q1 = new Question( "How many students were originally in the class?", new String [] {"12" , "9" , "15" , "18"}, 0 , Center ); 
+    Question q2 = new Question( "What was Nick's favorite part of the class?", new String [] {"working with GUIs", "Scratch", "lessons with Dr. Delin", "complaining about art history" }, 1, Center2);
+    Question q3 = new Question( "What is Nathan's go to don't focus in class game?", new String [] {"Minecraft", "Slay the Spire", "Cuphead" , "Nathan never played games in class"}, 3 , Center3);
+    Question q4 = new Question( "What points did the Banana Republic clicker use?", new String [] {"capitalist cash", "banana bucks", "lives ruined", "socialists arrested"}, 2 , Center4);
+    Question q5 = new Question( "What was Alec's Scratch final assignment about? ", new String [] {"choose your own adventure game" , "Dating Michael Cera" , "Ryhtem pinball" , "Kanye pong"}, 1 , Center5 ); 
+    Question q6 = new Question( "How many times has Alec brought pretzels to class?", new String [] {"6", "3", "11", "13" }, 2 , Center6);
+    Question q7 = new Question( "Which of the following teachers has sat in on our lectures?", new String [] {"Mr. Fritz", "Mrs. Gi", "Dr. Wahi" , "Dr.Williams"}, 1 , Center7);
+    Question q8 = new Question( "Who is this?", new String [] {"Alec front", "Bernie", "Alec back", "I've never seen this person in my life"}, 2, Center8);
+    Question q9 = new Question( "Which anime is the poster in the lab from?", new String [] {"Cowboy Beebop" , "Fooly Cooly" , "Trigun" , "Samurai Champloon"}, 0 , Center9); 
+    Question q10 = new Question( "What was the first algorithm our class worked on", new String [] {"How to get ready in the morning", "How to make a sandwhich", "How to do your homework", "How to commit tax fraud" }, 1, Center10);
     Question array [] = {q1,q2,q3,q4,q5,q6,q7,q8,q9,q10};
 
     int i= 0;  
@@ -46,10 +57,7 @@ public class Quiz implements ActionListener
     JPanel cComponent;
     JLabel nComponent2;
     JLabel cComponent2;
-    ImageIcon Center = new ImageIcon("test.jpg");
 
-    ImageIcon Center2 = new ImageIcon("Worm.jpg");
-    ImageIcon Center3 = new ImageIcon("");
 
     JRadioButton goback;
     JLabel cComponent3;
@@ -120,7 +128,7 @@ public class Quiz implements ActionListener
 
     public void nextQuestion() {
         i++;
-        shown = array[i];     
+        shown = array[i]; 
     }
 
     @Override
@@ -128,6 +136,7 @@ public class Quiz implements ActionListener
         String guess = event.getActionCommand();
         if (shown.check(guess)) {
             score = score + value;
+            System.out.println(score);
             questionsAsked++;
             value = 1;
             if (questionsAsked<10){
