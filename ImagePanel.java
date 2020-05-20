@@ -1,28 +1,14 @@
-
-
-public class ImagePanel
+import java.awt.*;
+import javax.swing.*;
+public class ImagePanel extends JPanel  //create the imageIcon used in cComponent
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    ImageIcon Center = new ImageIcon("test.jpg");
+    ImageIcon Center2 = new ImageIcon("Worm.jpg");
+    @Override
+    public void paintComponent(Graphics g) {
 
-    /**
-     * Constructor for objects of class ImagePanel
-     */
-    public ImagePanel()
-    {
-        // initialise instance variables
-        x = 0;
-    }
+        Image image = Center.getImage();
+        g.drawImage(image, 3, 4, this);
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
     }
 }
