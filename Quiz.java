@@ -8,40 +8,48 @@ import javax.sound.sampled.*;
 import java.lang.Exception;
 public class Quiz implements ActionListener 
 {
-    String incorrect = "Wrong.mp3";
+    String incorrect = "Wrong.wav";
     AudioInputStream audioStream;
     Clip clip;
 
-    String lose = "lose.mp3";
+    String lose = "lose.wav";
     AudioInputStream audioStream2;
     Clip clip2;
+
+    String win = "Win.wav";
+    AudioInputStream audioStream3;
+    Clip clip3;
 
     JFrame frame;
     JFrame frame2;
     JFrame frame3;
     JFrame frame4;
+    JFrame frame5;
 
-    ImageIcon Center = new ImageIcon("test.jpg");
-    ImageIcon Center2 = new ImageIcon("Worm.jpg");
-    ImageIcon Center3 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center4 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center5 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center6 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center7 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center8 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center9 = new ImageIcon("Yeti.jpg");
-    ImageIcon Center10 = new ImageIcon("Yeti.jpg");
-
+    ImageIcon Center = new ImageIcon("Who.jpg");
+    ImageIcon Center2 = new ImageIcon("Nick2.jpg");
+    ImageIcon Center3 = new ImageIcon("Nathan2.jpg");
+    ImageIcon Center4 = new ImageIcon("Republic.jpg");
+    ImageIcon Center5 = new ImageIcon("Neko.jpg");
+    ImageIcon Center6 = new ImageIcon("Pretzel.jpg");
+    ImageIcon Center7 = new ImageIcon("Who.jpg");
+    ImageIcon Center8 = new ImageIcon("Bernardi2.jpg");
+    ImageIcon Center9 = new ImageIcon("NoAnime2.jpg");
+    ImageIcon Center10 = new ImageIcon("Weezer2.jpg");
+    ImageIcon Center11 = new ImageIcon("Incorrect.jpg");
+    ImageIcon Center12 = new ImageIcon("Failure.jpg");
+    ImageIcon Center13 = new ImageIcon("Champion.jpg");
+    
     Question q1 = new Question( "How many students were originally in the class?", new String [] {"12" , "9" , "15" , "18"}, 0 , Center ); 
     Question q2 = new Question( "What was Nick's favorite part of the class?", new String [] {"working with GUIs", "Scratch", "lessons with Dr. Delin", "complaining about art history" }, 1, Center2);
     Question q3 = new Question( "What is Nathan's go to don't focus in class game?", new String [] {"Minecraft", "Slay the Spire", "Cuphead" , "Nathan never played games in class"}, 3 , Center3);
     Question q4 = new Question( "What points did the Banana Republic clicker use?", new String [] {"capitalist cash", "banana bucks", "lives ruined", "socialists arrested"}, 2 , Center4);
-    Question q5 = new Question( "What was Alec's Scratch final assignment about? ", new String [] {"choose your own adventure game" , "Dating Michael Cera" , "Ryhtem pinball" , "Kanye pong"}, 1 , Center5 ); 
+    Question q5 = new Question( "What was Alec's Scratch final assignment about? ", new String [] {"choose your own adventure game" , "Dating Michael Cera" , "Rythem pinball" , "Kanye pong"}, 1 , Center5 ); 
     Question q6 = new Question( "How many times has Alec brought pretzels to class?", new String [] {"6", "3", "11", "13" }, 2 , Center6);
     Question q7 = new Question( "Which of the following teachers has sat in on our lectures?", new String [] {"Mr. Fritz", "Mrs. Gi", "Dr. Wahi" , "Dr.Williams"}, 1 , Center7);
-    Question q8 = new Question( "Who is this?", new String [] {"Alec front", "Bernie", "Alec back", "I've never seen this person in my life"}, 2, Center8);
+    Question q8 = new Question( "Who is this?", new String [] {"Alec front", "Bernie", "Alec back", "I don't know"}, 2, Center8);
     Question q9 = new Question( "Which anime is the poster in the lab from?", new String [] {"Cowboy Beebop" , "Fooly Cooly" , "Trigun" , "Samurai Champloon"}, 0 , Center9); 
-    Question q10 = new Question( "What was the first algorithm our class worked on", new String [] {"How to get ready in the morning", "How to make a sandwhich", "How to do your homework", "How to commit tax fraud" }, 1, Center10);
+    Question q10 = new Question( "What is the worst band ever created", new String [] {"It's Weezer", "Weezer", "See image", "Click Weezer" }, 1, Center10);
     Question array [] = {q1,q2,q3,q4,q5,q6,q7,q8,q9,q10};
 
     int i= 0;  
@@ -58,50 +66,65 @@ public class Quiz implements ActionListener
     JLabel nComponent2;
     JLabel cComponent2;
 
-
     JRadioButton goback;
     JLabel cComponent3;
 
     JLabel cComponent4;
-
+    JLabel cComponent5; 
+    
     public Quiz()
     {
         frame = new JFrame();
         frame2 = new JFrame();
+        frame3 = new JFrame();
+        frame4 = new JFrame();
 
         nComponent = new JButton(shown.options[0]);
         sComponent = new JButton(shown.options[1]);
         eComponent = new JButton(shown.options[2]);
         wComponent = new JButton(shown.options[3]);
         cComponent = new JPanel();
+        nComponent2 = new JLabel(shown.text); 
+        cComponent2 = new JLabel(shown.icon);
 
-        JLabel nComponent2 = new JLabel(shown.text);
         JRadioButton goback = new JRadioButton("try again");
-        cComponent2 = new JLabel(Center);
+        cComponent3 = new JLabel(Center11); //not for frame
+        cComponent4 = new JLabel(Center12);
+        cComponent5 = new JLabel(Center13);
 
-        cComponent3 = new JLabel(Center2);
-        cComponent4 = new JLabel();
-
+     
         try {
             clip = AudioSystem.getClip();    
             audioStream = AudioSystem.getAudioInputStream(new File(incorrect).getAbsoluteFile());
             clip.open(audioStream);
         } catch (javax.sound.sampled.LineUnavailableException k){System.out.println("Line unavailable exception");}
 
-        catch (javax.sound.sampled.UnsupportedAudioFileException z) { System.out.println("Unsupported Audio");} 
+        catch (javax.sound.sampled.UnsupportedAudioFileException z) { System.out.println(z.getMessage());} 
 
-        catch(java.io.IOException w) {System.out.println("IOE");}
+        catch(java.io.IOException w) {System.out.println(w.getCause());
+            System.out.println(w.getMessage());}
 
         try {
             clip2 = AudioSystem.getClip();    
-            audioStream2 = AudioSystem.getAudioInputStream(new File(incorrect).getAbsoluteFile());
+            audioStream2 = AudioSystem.getAudioInputStream(new File(lose).getAbsoluteFile());
             clip2.open(audioStream2);
-        } catch (javax.sound.sampled.LineUnavailableException k){System.out.println("Line unavailable exception");}
+        } catch (javax.sound.sampled.LineUnavailableException w){System.out.println("Line unavailable exception");}
 
-        catch (javax.sound.sampled.UnsupportedAudioFileException z) { System.out.println("Unsupported Audio");} 
+        catch (javax.sound.sampled.UnsupportedAudioFileException e) { System.out.println("Unsupported Audio");} 
 
-        catch(java.io.IOException w) {System.out.println("IOE");}
+        catch(java.io.IOException q) {System.out.println("IOE");}
 
+       
+         try {
+            clip3 = AudioSystem.getClip();    
+            audioStream3 = AudioSystem.getAudioInputStream(new File(win).getAbsoluteFile());
+            clip3.open(audioStream3);
+        } catch (javax.sound.sampled.LineUnavailableException o){System.out.println("Line unavailable exception");}
+
+        catch (javax.sound.sampled.UnsupportedAudioFileException p) { System.out.println("Unsupported Audio");} 
+
+        catch(java.io.IOException m) {System.out.println("IOE");}
+        
         frame.setLayout(new BorderLayout());
         cComponent.setLayout(new BorderLayout());
         frame.add(BorderLayout.NORTH, nComponent);
@@ -115,20 +138,41 @@ public class Quiz implements ActionListener
         frame2.add(BorderLayout.SOUTH, goback);
         frame2.add(BorderLayout.CENTER,cComponent3);
 
+        frame3.add(BorderLayout.CENTER, cComponent4);
+        
+        frame4.add(BorderLayout.CENTER, cComponent5);
+
         nComponent.addActionListener(this);
         sComponent.addActionListener(this);
         eComponent.addActionListener(this);
         wComponent.addActionListener(this);
         goback.addActionListener(new rewind());
-        frame.setSize(650,650);
+        frame.setSize(800,800);
         frame.setVisible(true);
         frame2.setVisible(false);
-        frame2.setSize(650,650);
+        frame2.setSize(800,800);
+        frame3.setVisible(false);
+        frame3.setSize(800,800);
+        frame4.setVisible(false);
+        frame4.setSize(800,800);
     }
 
     public void nextQuestion() {
         i++;
         shown = array[i]; 
+        update();
+        cComponent.repaint();
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void update() {
+        nComponent.setText(shown.options[0]);
+        sComponent.setText(shown.options[1]);
+        eComponent.setText(shown.options[2]);
+        wComponent.setText(shown.options[3]);
+        nComponent2.setText(shown.text); 
+        cComponent2.setIcon(shown.icon);
     }
 
     @Override
@@ -139,36 +183,40 @@ public class Quiz implements ActionListener
             System.out.println(score);
             questionsAsked++;
             value = 1;
-            if (questionsAsked<10){
-                nextQuestion();
-            }
-            else {
+            if (questionsAsked < 10) {
+                nextQuestion();   
+            }else 
+            if (questionsAsked == 10) {
                 finale();
             }
         }
         else {
             value = 0;
-            frame.setVisible(false);
-            frame2.setVisible(true);
             clip.setFramePosition(0);
             clip.start();
+            frame.setVisible(false);
+            frame2.setVisible(true);           
         } 
     }
 
     public void finale() {
         if (score<= 6)  {
+            clip2.setFramePosition(0);
+            clip2.start();
             frame.setVisible(false);
             frame2.setVisible(false);
             frame3.setVisible(true);
-            clip2.setFramePosition(0);
-            clip2.start();
+
         }
-        else {
+        else  {
+            clip3.setFramePosition(0);
+            clip3.start();
             frame.setVisible(false);
             frame2.setVisible(false);
             frame3.setVisible(false);
             frame4.setVisible(true);
-        }
+            
+        } 
     }
 
     public static void main(String [] args) {

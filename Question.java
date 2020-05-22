@@ -6,10 +6,12 @@ public class Question
     String text;
     String options [];
     String answer;
+    ImageIcon icon;
     public Question(String startText, String [] startOptions, int startAnswer, ImageIcon image ) { //construct a questoin
         answer = startOptions [startAnswer];  
         text = startText;
         options = startOptions;
+        icon = image;
 
     }
 
