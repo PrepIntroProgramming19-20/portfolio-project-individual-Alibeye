@@ -8,15 +8,15 @@ import javax.sound.sampled.*;
 import java.lang.Exception;
 public class Quiz implements ActionListener 
 {
-    String incorrect = "Wrong.wav";
+    String incorrect = "Wrong.wav"; //got a question wrong
     AudioInputStream audioStream;
     Clip clip;
 
-    String lose = "lose.wav";
+    String lose = "lose.wav"; //got a score of less than six
     AudioInputStream audioStream2;
     Clip clip2;
 
-    String win = "Win.wav";
+    String win = "Win.wav"; //got a score greater than six
     AudioInputStream audioStream3;
     Clip clip3;
 
@@ -35,11 +35,11 @@ public class Quiz implements ActionListener
     ImageIcon Center7 = new ImageIcon("Who.jpg");
     ImageIcon Center8 = new ImageIcon("Bernardi2.jpg");
     ImageIcon Center9 = new ImageIcon("NoAnime2.jpg");
-    ImageIcon Center10 = new ImageIcon("Weezer2.jpg");
+    ImageIcon Center10 = new ImageIcon("Weezer2.jpg"); //sorry if you like Weezer I just hate them with a burning passion
     ImageIcon Center11 = new ImageIcon("Incorrect.jpg");
     ImageIcon Center12 = new ImageIcon("Failure.jpg");
     ImageIcon Center13 = new ImageIcon("Champion.jpg");
-    
+
     Question q1 = new Question( "How many students were originally in the class?", new String [] {"12" , "9" , "15" , "18"}, 0 , Center ); 
     Question q2 = new Question( "What was Nick's favorite part of the class?", new String [] {"working with GUIs", "Scratch", "lessons with Dr. Delin", "complaining about art history" }, 1, Center2);
     Question q3 = new Question( "What is Nathan's go to don't focus in class game?", new String [] {"Minecraft", "Slay the Spire", "Cuphead" , "Nathan never played games in class"}, 3 , Center3);
@@ -52,26 +52,27 @@ public class Quiz implements ActionListener
     Question q10 = new Question( "What is the worst band ever created", new String [] {"It's Weezer", "Weezer", "See image", "Click Weezer" }, 1, Center10);
     Question array [] = {q1,q2,q3,q4,q5,q6,q7,q8,q9,q10};
 
-    int i= 0;  
+    int i= 0;  //instances used throughout the quiz
     int questionsAsked = 0;
     int score = 0;
     int value = 1;    
     Question shown = array[i];
 
-    JButton nComponent;
+    JButton nComponent; //all the JButton answer options
     JButton sComponent;
     JButton eComponent;
     JButton wComponent;
-    JPanel cComponent;
-    JLabel nComponent2;
+
+    JPanel cComponent;  //the center panel which houses the question and an image
+
+    JLabel nComponent2;  //label componenets within other frames or within cComponent
     JLabel cComponent2;
-
-    JRadioButton goback;
     JLabel cComponent3;
-
     JLabel cComponent4;
     JLabel cComponent5; 
-    
+
+    JRadioButton goback; //click this if you got an answer wrong
+
     public Quiz()
     {
         frame = new JFrame();
@@ -83,16 +84,18 @@ public class Quiz implements ActionListener
         sComponent = new JButton(shown.options[1]);
         eComponent = new JButton(shown.options[2]);
         wComponent = new JButton(shown.options[3]);
+        
         cComponent = new JPanel();
+        
         nComponent2 = new JLabel(shown.text); 
         cComponent2 = new JLabel(shown.icon);
-
-        JRadioButton goback = new JRadioButton("try again");
-        cComponent3 = new JLabel(Center11); //not for frame
+        cComponent3 = new JLabel(Center11);
         cComponent4 = new JLabel(Center12);
         cComponent5 = new JLabel(Center13);
 
-     
+        JRadioButton goback = new JRadioButton("try again");
+        
+        //try catches for all threee sound files
         try {
             clip = AudioSystem.getClip();    
             audioStream = AudioSystem.getAudioInputStream(new File(incorrect).getAbsoluteFile());
@@ -114,8 +117,7 @@ public class Quiz implements ActionListener
 
         catch(java.io.IOException q) {System.out.println("IOE");}
 
-       
-         try {
+        try {
             clip3 = AudioSystem.getClip();    
             audioStream3 = AudioSystem.getAudioInputStream(new File(win).getAbsoluteFile());
             clip3.open(audioStream3);
@@ -124,7 +126,8 @@ public class Quiz implements ActionListener
         catch (javax.sound.sampled.UnsupportedAudioFileException p) { System.out.println("Unsupported Audio");} 
 
         catch(java.io.IOException m) {System.out.println("IOE");}
-        
+
+        //setting border layout
         frame.setLayout(new BorderLayout());
         cComponent.setLayout(new BorderLayout());
         frame.add(BorderLayout.NORTH, nComponent);
@@ -139,14 +142,14 @@ public class Quiz implements ActionListener
         frame2.add(BorderLayout.CENTER,cComponent3);
 
         frame3.add(BorderLayout.CENTER, cComponent4);
-        
+
         frame4.add(BorderLayout.CENTER, cComponent5);
 
-        nComponent.addActionListener(this);
+        nComponent.addActionListener(this); //implementing actionListener and setting frame sizes and visibility
         sComponent.addActionListener(this);
         eComponent.addActionListener(this);
         wComponent.addActionListener(this);
-        goback.addActionListener(new rewind());
+        goback.addActionListener(new rewind()); 
         frame.setSize(800,800);
         frame.setVisible(true);
         frame2.setVisible(false);
@@ -157,7 +160,7 @@ public class Quiz implements ActionListener
         frame4.setSize(800,800);
     }
 
-    public void nextQuestion() {
+    public void nextQuestion() { //resets the frame with content from a new instance of array[i] which just increased by 1
         i++;
         shown = array[i]; 
         update();
@@ -166,7 +169,7 @@ public class Quiz implements ActionListener
         frame.repaint();
     }
 
-    public void update() {
+    public void update() { //sets the components of the frame to display the content previously mentioned in nextQuestion()
         nComponent.setText(shown.options[0]);
         sComponent.setText(shown.options[1]);
         eComponent.setText(shown.options[2]);
@@ -176,21 +179,21 @@ public class Quiz implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(ActionEvent event) {  //simplifyed action listener which works for all four answer choices
         String guess = event.getActionCommand();
-        if (shown.check(guess)) {
+        if (shown.check(guess)) { //if you are correct
             score = score + value;
             System.out.println(score);
             questionsAsked++;
             value = 1;
-            if (questionsAsked < 10) {
+            if (questionsAsked < 10) { //if you still have questions remaining
                 nextQuestion();   
             }else 
-            if (questionsAsked == 10) {
+            if (questionsAsked == 10) { //once you are done with the quiz
                 finale();
             }
         }
-        else {
+        else { //if you get a question wrong
             value = 0;
             clip.setFramePosition(0);
             clip.start();
@@ -199,8 +202,8 @@ public class Quiz implements ActionListener
         } 
     }
 
-    public void finale() {
-        if (score<= 6)  {
+    public void finale() { //the end of the quiz which shows how you did
+        if (score<= 6)  { // if you failed
             clip2.setFramePosition(0);
             clip2.start();
             frame.setVisible(false);
@@ -208,22 +211,22 @@ public class Quiz implements ActionListener
             frame3.setVisible(true);
 
         }
-        else  {
+        else  { //if you passed
             clip3.setFramePosition(0);
             clip3.start();
             frame.setVisible(false);
             frame2.setVisible(false);
             frame3.setVisible(false);
             frame4.setVisible(true);
-            
+
         } 
     }
 
-    public static void main(String [] args) {
+    public static void main(String [] args) { //main method
         Quiz q1 = new Quiz();    
     }
 
-    class rewind implements ActionListener {
+    class rewind implements ActionListener { //action listener for the "try again" button 
         public void actionPerformed(ActionEvent event) {
             frame.setVisible(true);
             frame2.setVisible(false);
