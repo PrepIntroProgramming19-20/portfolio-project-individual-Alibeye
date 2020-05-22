@@ -29,7 +29,7 @@ public class Quiz implements ActionListener
     ImageIcon Center = new ImageIcon("Who.jpg");
     ImageIcon Center2 = new ImageIcon("Nick2.jpg");
     ImageIcon Center3 = new ImageIcon("Nathan2.jpg");
-    ImageIcon Center4 = new ImageIcon("Republic.jpg");
+    ImageIcon Center4 = new ImageIcon("Republic2.jpg");
     ImageIcon Center5 = new ImageIcon("Neko.jpg");
     ImageIcon Center6 = new ImageIcon("Pretzel.jpg");
     ImageIcon Center7 = new ImageIcon("Who.jpg");
